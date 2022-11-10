@@ -18,7 +18,10 @@ func main() {
 		v1.PUT("/:id", updateTodo)
 		v1.DELETE("/:id", deleteTodo)
 	}
-	router.Run()
+	err := router.Run()
+	if err != nil {
+		return
+	}
 }
 
 var db *gorm.DB
