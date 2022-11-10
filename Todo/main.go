@@ -42,7 +42,7 @@ type todoModel struct {
 }
 
 type transformedTodo struct {
-	ID        unit   `json:"id"`
+	ID        uint   `json:"id"`
 	Title     string `json:"title"`
 	Completed bool   `json:"completed"`
 }
@@ -107,6 +107,7 @@ func updateTodo(c *gin.Context) {
 
 	db.Model(&todo).Update("title", c.PostForm("title"))
 	completed, _ := strconv.Atoi(c.PostForm("completed"))
+	db.Model(&todo).Update("completed", completed)
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "message": "Todo updated successfully!"})
 }
 
